@@ -1,7 +1,7 @@
 {
-  "name": "friendly-sniffle",
+  "name": "warskif",
   "version": "1.0.0",
-  "description": "Template for website using Webpack",
+  "description": "A game that has nothing to do with battles or ships",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -11,16 +11,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BigBoPeep420/friendly-sniffle.git"
+    "url": "git+https://github.com/BigBoPeep420/Warskif.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/BigBoPeep420/friendly-sniffle/issues"
+    "url": "https://github.com/BigBoPeep420/Warskif/issues"
   },
-  "homepage": "https://github.com/BigBoPeep420/friendly-sniffle#readme",
+  "homepage": "https://github.com/BigBoPeep420/Warskif#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.29.0",
     "css-loader": "^7.1.4",
@@ -38,5 +38,9 @@
     "glob": "^11.0.0",
     "inflight": "lru-cache",
     "minimatch": "^10.2.1"
+  },
+  "dependencies": {
+    "@shopify/draggable": "^1.2.1",
+    "jquery": "^4.0.0"
   }
 }

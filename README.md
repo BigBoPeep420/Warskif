@@ -1,3 +1,3 @@
-# friendly-sniffle
+# Warskif
 
-Template for website using Webpack
+A game that has nothing to do with battles or ships.

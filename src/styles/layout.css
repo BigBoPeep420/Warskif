@@ -1,0 +1,9 @@
+body {
+  width: 100dvw;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+header {
+}

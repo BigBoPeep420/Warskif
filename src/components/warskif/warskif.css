@@ -1,0 +1,77 @@
+#warskif {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  #msgBar {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    padding: 0.3rem;
+    background: #00000021;
+
+    #msgBarP {
+      margin: auto;
+    }
+
+    #settingsBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.2rem;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  #gameBoard {
+    --boardSize: 10;
+    background-color: var(--clrPlayer1);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template: repeat(var(--boardSize), 1fr) / repeat(var(--boardSize), 1fr);
+
+    .boardCell {
+      border: solid 1px black;
+    }
+
+    .skifIcon {
+      grid-area: var(--rowStart) / var(--colStart) / var(--rowEnd) /
+        var(--colEnd);
+    }
+  }
+
+  #skifDock {
+    background-color: #000000;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .skifIcon {
+      height: 3rem;
+      aspect-ratio: auto;
+    }
+  }
+
+  .dragGhost {
+    background: transparent !important;
+    height: 3rem;
+  }
+}

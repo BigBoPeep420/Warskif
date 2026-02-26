@@ -24,10 +24,7 @@ class Gameboard {
   #skifs;
 
   constructor(size = 10) {
-    this.#size = size;
-    this.#board = Array.from({ length: this.#size }, () =>
-      Array.from({ length: this.#size }, () => 0),
-    );
+    this.size = size;
     this.#skifs = 0;
   }
 
@@ -70,7 +67,7 @@ class Gameboard {
       if (square.sunk) this.#skifs--;
       return true;
     } else {
-      this.#board[x][y] = 1;
+      this.#board[coords[0]][coords[1]] = 1;
       return false;
     }
   }
@@ -78,14 +75,43 @@ class Gameboard {
   get allSunk() {
     return this.#skifs <= 0;
   }
+
+  clearBoard(newSize = this.#size) {
+    this.#skifs = 0;
+    this.#size = newSize;
+    this.#board = Array.from({ length: this.#size }, () =>
+      Array.from({ length: this.#size }, () => 0),
+    );
+  }
+
+  get size() {
+    return this.#size;
+  }
+
+  set size(val) {
+    if (val < 6 || val > 20) val = 10;
+    this.#size = val;
+    this.#board = Array.from({ length: this.#size }, () =>
+      Array.from({ length: this.#size }, () => 0),
+    );
+  }
+
+  get data() {
+    return this.#board.map((col) => col.slice(0));
+  }
 }
 
 class Player {
   #board;
   #type;
 
-  constructor(type = 0) {
-    this.#board = new Gameboard();
+  /**
+   *
+   * @param {number} type - 0 == AI (default), 1 == Human
+   * @param {number} boardSize - Length of one side of board. Must be 6 - 20 (default == 10).
+   */
+  constructor(type = 0, boardSize = 10) {
+    this.#board = new Gameboard(boardSize);
     this.#type = type;
   }
 
