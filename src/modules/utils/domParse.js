@@ -1,9 +1,13 @@
+/**
+ * Takes a raw string of element tags/data such as '&lt;p class="hi"&gt;Hi&lt;/p&gt;' along with a string
+ * to indicate what kind of element it is and returns a DOM-ready element.
+ * @param {string} string String to parse into DOM element
+ * @param {string} elementType String indicating element type. Possible values 'html', 'xml', 'xhtml', 'svg'.
+ * @returns {HTMLElement} DOM-ready element
+ */
 function stringToElement(string, elementType) {
   let type;
   switch (elementType) {
-    case "html":
-      type = "text/html";
-      break;
     case "xml":
       type = "application/xml";
       break;
@@ -12,6 +16,9 @@ function stringToElement(string, elementType) {
       break;
     case "svg":
       type = "image/svg+xml";
+      break;
+    default:
+      type = "text/html";
       break;
   }
   const parser = new DOMParser();

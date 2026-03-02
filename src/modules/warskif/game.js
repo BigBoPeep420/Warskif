@@ -1,12 +1,12 @@
 class Skif {
   #length;
   #hits;
-  #name;
+  #type;
 
-  constructor(length = 1, name = "Skif") {
+  constructor(length = 2, type = "skif") {
     this.#length = length;
     this.#hits = 0;
-    this.#name = name;
+    this.#type = type;
   }
 
   hit() {
@@ -15,6 +15,10 @@ class Skif {
 
   get sunk() {
     return this.#hits >= this.#length;
+  }
+
+  get type() {
+    return this.#type;
   }
 }
 
@@ -25,7 +29,7 @@ class Gameboard {
 
   constructor(size = 10) {
     this.size = size;
-    this.#skifs = 0;
+    this.#skifs = [];
   }
 
   #outOfBnds(coords) {
@@ -36,7 +40,12 @@ class Gameboard {
     return false;
   }
 
-  placeSkif(coords, direction = 0, skifData = { name: "Skif", length: 1 }) {
+  placeSkif(coords, direction = 0, skifData = { type: "skif", length: 2 }) {
+    if (
+      this.#skifs.findIndex((skifObj) => skifObj.skif.type === skifData.type) >=
+      0
+    )
+      return false;
     let safe = [];
     for (let i = 0; i < skifData.length; i++) {
       let x = direction === 1 ? coords[0] : coords[0] + i;
@@ -51,12 +60,24 @@ class Gameboard {
         return false;
       } else safe.push([x, y]);
     }
-    const newSkif = new Skif(skifData.length, skifData.name);
+    const newSkif = new Skif(skifData.length, skifData.type);
     safe.forEach((coord) => {
       this.#board[coord[0]][coord[1]] = newSkif;
     });
-    this.#skifs++;
+    this.#skifs.push({ skif: newSkif, cells: safe });
     return true;
+  }
+
+  removeSkif(skifType) {
+    const ind = this.#skifs.findIndex((skifObj) => {
+      return skifObj.skif.type === skifType;
+    });
+    if (ind >= 0) {
+      this.#skifs[ind].cells.forEach((coords) => {
+        this.#board[coords[0]][coords[1]] = 0;
+      });
+      this.#skifs.splice(ind, 1);
+    }
   }
 
   receiveAttack(coords) {
@@ -65,6 +86,7 @@ class Gameboard {
     if (square instanceof Skif) {
       square.hit();
       if (square.sunk) this.#skifs--;
+      this.#board[coords[0]][coords[1]] = 2;
       return true;
     } else {
       this.#board[coords[0]][coords[1]] = 1;

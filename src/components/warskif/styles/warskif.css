@@ -1,0 +1,200 @@
+:root {
+  --waveSize: 5dvw;
+}
+
+#warskif {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  #msgBar {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    padding: 0.3rem;
+    background: #00000021;
+
+    #msgBarP {
+      margin: auto;
+    }
+
+    #settingsBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.2rem;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  #gameBoard {
+    --boardSize: 10;
+    background-color: var(--clrWater);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    grid-template: repeat(var(--boardSize), 1fr) / repeat(var(--boardSize), 1fr);
+    overflow: hidden;
+
+    #waves {
+      position: absolute;
+      height: 100%;
+      width: 2048px;
+      will-change: transform;
+      transform: translateX(0);
+      opacity: 0.2;
+      background: url("../../../assets/images/wave1lg.webp");
+      animation: waves 120s steps(300, end) infinite;
+    }
+
+    .boardCell {
+      border: solid 1px black;
+      z-index: 1;
+      position: relative;
+    }
+
+    .skifIcon,
+    #skifPlaceholder {
+      height: 90%;
+      width: 90%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-self: center;
+      justify-self: center;
+      grid-area: var(--rowStart) / var(--colStart) / var(--rowEnd) /
+        var(--colEnd);
+      z-index: 2;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  #skifDock {
+    background-color: #00000050;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in;
+    z-index: 2;
+
+    #dockToggle {
+      position: fixed;
+      right: 0;
+      width: 3rem;
+      transform: translateX(100%);
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .skifIcon {
+      height: 3rem;
+      aspect-ratio: auto;
+      svg {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+    }
+  }
+  #skifDock.open {
+    transform: translateX(0);
+  }
+
+  #skifPlaceholder {
+    z-index: 999;
+  }
+
+  .skifIcon {
+    cursor: grab;
+  }
+
+  #settingsDrwr {
+    background-color: #00000021;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+
+    .close {
+      position: absolute;
+      width: 2.5rem;
+      height: 2.5rem;
+      top: 0.5rem;
+      right: 0.5rem;
+      border-radius: 50%;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .title {
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .boardSizeSect {
+        display: flex;
+        gap: 0.5rem;
+
+        #boardSize {
+        }
+      }
+
+      .play {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  #settingsDrwr.open {
+    transform: translateY(0);
+  }
+}
+
+@keyframes waves {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-1024px, 0, 0);
+  }
+}

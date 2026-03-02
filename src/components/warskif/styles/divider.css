@@ -1,0 +1,25 @@
+ws-divider {
+  background-color: var(--clrDivider);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease-out;
+
+  .text {
+    text-align: center;
+  }
+
+  .subtext {
+    text-align: center;
+  }
+}
+
+ws-divider:state(open) {
+  transform: translateY(0);
+}

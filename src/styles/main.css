@@ -1,3 +1,11 @@
+:root {
+  --clrWater: #0b7aa7;
+  --clrDivider: #6b6b6b;
+
+  --clrPlayer1: #2220aa;
+  --clrPlayer2: #b32b2b;
+}
+
 * {
   margin: 0;
   padding: 0;
